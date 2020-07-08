@@ -5,10 +5,19 @@ from flask import Flask, render_template, jsonify
 app = Flask(__name__)
 
 SOME_HISTORICAL_DATES = [
+    (date(1776, 7, 4), 'the signing of the Declaration of Independence'),
+    (date(1859, 11, 24), 'publication of Darwin\'s On the Origin of Species'),
     (date(1930, 7, 7), 'the death of Arthur Conan Doyle'),
     (date(1945, 9, 2), 'the official end of World War II'),
     (date(1947, 8, 15), 'Indian independence from the United Kingdom'),
     (date(1977, 8, 16), 'Elvis Presley\'s death'),
+    (date(1980, 5, 18), 'Mount St. Helens\'s eruption'),
+    (date(1985, 10, 18), 'the NES launch in New York'),
+    (date(1991, 12, 26), 'the end of the USSR'),
+    (date(1993, 9, 21), 'the release of Nirvana\'s In Utero'),
+    (date(1995, 2, 14), 'the launch of YouTube'),
+    (date(1998, 8, 15), 'the launch of the iMac'),
+    (date(2001, 9, 11), 'the destruction of the World Trade Center'),
     (date(2008, 11, 4), 'Barack Obama\'s first presidential election victory'),
 ]
 
