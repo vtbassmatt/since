@@ -21,4 +21,5 @@ jobs:
     - run: |
         echo "Deploying ${{ github.events.inputs.ref }}"
         ssh since.vtbassmatt.com 'ls /home'
+        # deploy/deploy.sh $GITHUB_WORKSPACE
   

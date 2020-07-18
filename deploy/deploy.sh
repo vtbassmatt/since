@@ -1,7 +1,14 @@
 #!/usr/bin/env bash
+# usage: ./deploy.sh PROJECT_ROOT
 set -eux
 
-PROJECT_DIR="/Users/mattc/Projects/since/"
+PROJECT_DIR="$1/"
+
+if [[ ! -d $PROJECT_DIR ]]; then
+  echo "Usage: $0 <root-directory>"
+  exit 1
+fi
+
 SOURCE="${PROJECT_DIR}src/"
 APP_HOST="since.vtbassmatt.com"
 APP_DIR="/data/since-app/"
@@ -49,7 +56,8 @@ eval $LN_SRC_CMD
 eval $LN_VENV_CMD
 
 echo "::::: Restarting uWSGI"
-echo "TODO"
+RESTART_CMD="ssh ${APP_USER}@$APP_HOST 'sudo systemctl restart since-app'"
+eval $RESTART_CMD
 
 # echo "::::: Get stats on orphaned deploys"
 # echo "TODO"
