@@ -1,0 +1,25 @@
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: 'Ref to deploy'
+        required: true
+        default: 'refs/heads/main'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v2
+      with:
+        ref: ${{ github.events.inputs.ref }}
+    - uses: shimataro/ssh-key-action@8ddce4efa1dc93160617224cdadf97c23bb3814a # v2.0.3
+      with:
+        key: ${{ secrets.DEPLOY_SSH_KEY }}
+        known_hosts: ${{ secrets.DEPLOY_KNOWN_HOSTS }}
+        config: ${{ secrets.DEPLOY_SSH_CONFIG }}
+    - run: |
+        echo "Deploying ${{ github.events.inputs.ref }}"
+        ssh since.vtbassmatt.com 'ls /home'
+        # deploy/deploy.sh $GITHUB_WORKSPACE
+  
