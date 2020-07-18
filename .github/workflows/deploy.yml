@@ -12,7 +12,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
       with:
-        ref: ${{ github.events.inputs.deployref }}
+        ref: ${{ github.event.inputs.deployref }}
     - uses: shimataro/ssh-key-action@8ddce4efa1dc93160617224cdadf97c23bb3814a # v2.0.3
       with:
         key: ${{ secrets.DEPLOY_SSH_KEY }}
@@ -20,6 +20,6 @@ jobs:
         config: ${{ secrets.DEPLOY_SSH_CONFIG }}
     - name: Deploy to production
       run: |
-        echo "Deploying ${{ github.events.inputs.deployref }}"
+        echo "Deploying ${{ github.event.inputs.deployref }}"
         #deploy/deploy.sh $GITHUB_WORKSPACE
   
