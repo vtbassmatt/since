@@ -12,13 +12,14 @@ declare -a GOOD_TARGETS
 
 for SRC in "${LINK_SOURCES[@]}"; do
   DEST=$(readlink "$BASE_DIR/$SRC" || true)
-  if [[ -e "$BASE_DIR/$DEST" ]]; then
-    DEST=$(basename "$BASE_DIR/$DEST")
+  # seems to behave differently on macOS/zsh and Linux/bash
+  if [[ -e "$DEST" ]]; then
+    DEST=$(basename "$DEST")
     GOOD_TARGETS+=( "$DEST" )
   fi
 done
 
-CMD="ls $BASE_DIR/deploys/"
+CMD="ls -A $BASE_DIR/deploys/"
 for TARGET in "${GOOD_TARGETS[@]}"; do
   CMD="$CMD | grep -v $TARGET"
 done
