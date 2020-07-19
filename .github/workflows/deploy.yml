@@ -1,4 +1,4 @@
-name: Deploy since.vtbassmatt.com
+name: Deploy since.vtbassmatt.com from ${{ github.event.inputs.deployref }}
 
 on:
   workflow_dispatch:
