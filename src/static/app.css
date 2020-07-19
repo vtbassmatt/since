@@ -1,0 +1,8 @@
+@counter-style calendar {
+  system: cyclic;
+  symbols: "\1f5d3";
+  suffix: " ";
+}
+.calendar-bullets {
+  list-style-type: calendar;
+}

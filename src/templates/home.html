@@ -1,9 +1,10 @@
 {% extends 'base.html' %}
+{% block title %}Closer to the past{% endblock %}
 {% block content %}
-<h1>Days since ...</h1>
+<h1>Closer to the past</h1>
 <p><em><code>$ImportantDate</code> is now closer to <code>$DistantPastDate</code> than to today.</em></p>
 <p>Try a few of these dates:</p>
-<ul>
+<ul class="calendar-bullets">
   <li><a href="{{ url_for('since_page', request_date='2007-06-25') }}">June 25, 2007</a></li>
   <li><a href="{{ url_for('since_page', request_date='2000-01-01') }}">January 1, 2000</a></li>
   <li><a href="{{ url_for('since_page', request_date='1982-12-03') }}">December 3, 1982</a></li>
