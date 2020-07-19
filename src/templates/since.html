@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Days since {{ rdate }}</h1>
+<p>That's closer to <mark class="historical-caption"><code>$HistoricalDate</code></mark> (<mark class="historical-date">0000-00-00</mark>) than to today.</p>
+<p><mark class="historical-date">0000-00-00</mark> to {{ rdate }}: <mark class="historical-to-requested">0</mark> days.</p>
+<p>{{ rdate }} to today: <mark class="requested-to-today">0</mark> days.</p>
+<p><code><kbd>GET</kbd> <a href="{{ url_for('since_api', request_date=rdate) }}">{{ url_for('since_api', request_date=rdate) }}</a></code></p>
+{% endblock %}
+
+{% block postjquery %}
+<script>
+const api_response = {{ api_response|tojson }};
+$(document).ready(function() {
+  $('.historical-caption').text(api_response['historical_fact']['caption']);
+  $('.historical-date').text(api_response['historical_fact']['found_date']);
+  $('.historical-to-requested').text(api_response['historical_fact']['days_from_this_to_requested']);
+  $('.requested-to-today').text(api_response['requested']['days_since']);
+});
+</script>
+{% endblock%}}
