@@ -60,7 +60,7 @@ RESTART_CMD="ssh ${APP_USER}@$APP_HOST 'sudo systemctl restart since-app'"
 eval $RESTART_CMD
 
 echo "::::: List orphaned deploys"
-ORPHAN_SCP_CMD="scp -B ${PROJECT_DIR}deploy/lsorphans.sh ${APP_DIR}lsorphans.sh"
+ORPHAN_SCP_CMD="scp -B ${PROJECT_DIR}deploy/lsorphans.sh ${APP_USER}@${APP_HOST}:${APP_DIR}"
 ORPHAN_LS_CMD="ssh ${APP_USER}@$APP_HOST '${APP_DIR}lsorphans.sh ${APP_DIR}deploys/ | tee ${APP_DIR}orphans.txt'"
 eval $ORPHAN_SCP_CMD
 eval $ORPHAN_LS_CMD
