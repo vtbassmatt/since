@@ -26,8 +26,8 @@ def home():
     return render_template('home.html')
 
 
-@app.route("/<request_date>")
-def get_since(request_date):
+@app.route("/v1/<request_date>")
+def since_api(request_date):
     try:
         parsed_date = datetime.strptime(request_date, '%Y-%m-%d')
     except ValueError as e:
@@ -71,7 +71,6 @@ def get_since(request_date):
 
 # dumbest possible implementation that works
 def find_historical_thing(items, search_date):
-    print(search_date)
     for i in range(len(items)):
         if items[i][0] > search_date:
             return items[i]
