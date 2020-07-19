@@ -15,7 +15,7 @@ APP_DIR="/data/since-app/"
 APP_USER="since"
 DEPLOY_NAME="$(date '+%Y-%m-%d-%H-%M-%S')-$(git rev-parse --short HEAD)"
 DEPLOY_DIR="${APP_DIR}deploys/${DEPLOY_NAME}/"
-VENV_DIR="${APP_DIR}.env-${DEPLOY_NAME}"
+VENV_DIR="${APP_DIR}deploys/.env-${DEPLOY_NAME}"
 SCP_TARGET="${APP_USER}@${APP_HOST}:${DEPLOY_DIR}"
 
 echo "::::: Creating target directory"
