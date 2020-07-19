@@ -1,6 +1,6 @@
 from datetime import date, datetime
 
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template, jsonify, abort
 
 app = Flask(__name__)
 
@@ -26,8 +26,24 @@ def home():
     return render_template('home.html')
 
 
-@app.route("/<request_date>")
-def get_since(request_date):
+@app.route("/since/<request_date>")
+def since_page(request_date):
+    try:
+        parsed_date = datetime.strptime(request_date, '%Y-%m-%d')
+    except ValueError:
+        abort(404)
+    
+    string_date = parsed_date.strftime('%Y-%m-%d')
+    api_response = since_api(string_date)
+
+    return render_template(
+        'since.html',
+        rdate=string_date,
+        api_response=api_response.get_json())
+
+
+@app.route("/api/v1/<request_date>")
+def since_api(request_date):
     try:
         parsed_date = datetime.strptime(request_date, '%Y-%m-%d')
     except ValueError as e:
@@ -44,11 +60,11 @@ def get_since(request_date):
 
     response = {
         'requested': {
-            'date': request_date_cleaned,
+            'date': request_date_cleaned.strftime('%Y-%m-%d'),
             'days_since': days_since.days,
         },
         'historical_fact': {
-            'searched_date': search_date,
+            'searched_date': search_date.strftime('%Y-%m-%d'),
         },
     }
 
@@ -58,7 +74,7 @@ def get_since(request_date):
 
         if days_from_historical_to_request >= 0:
             response['historical_fact'].update({
-                'found_date': historical_thing[0],
+                'found_date': historical_thing[0].strftime('%Y-%m-%d'),
                 'caption': historical_thing[1],
                 'days_from_this_to_requested': days_from_historical_to_request,
             })
@@ -71,7 +87,6 @@ def get_since(request_date):
 
 # dumbest possible implementation that works
 def find_historical_thing(items, search_date):
-    print(search_date)
     for i in range(len(items)):
         if items[i][0] > search_date:
             return items[i]
