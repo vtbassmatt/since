@@ -2,12 +2,14 @@
 {% block title %}{{ rdate }} is closer to the past{% endblock %}
 {% block content %}
 <h1>{{ rdate }} is closer to the past</h1>
-<p>That's closer to <mark class="historical-caption"><code>$DistantPastDate</code></mark> (<mark class="historical-date">0000-00-00</mark>) than to today.</p>
-<ul class="calendar-bullets">
-  <li><span class="historical-date">0000-00-00</span> to {{ rdate }}: <mark class="historical-to-requested">0</mark> days.</li>
-  <li>{{ rdate }} to today: <mark class="requested-to-today">0</mark> days.</li>
-  <li><code><kbd>GET</kbd> <a href="{{ url_for('since_api', request_date=rdate) }}">{{ url_for('since_api', request_date=rdate) }}</a></code></li>
-</ul>
+<div id="cool-historical-fact">
+  <p>That's closer to <mark class="historical-caption"><code>$DistantPastDate</code></mark> (<mark class="historical-date">0000-00-00</mark>) than to today.</p>
+  <ul class="calendar-bullets">
+    <li><span class="historical-date">0000-00-00</span> to {{ rdate }}: <mark class="historical-to-requested">0</mark> days.</li>
+    <li>{{ rdate }} to today: <mark class="requested-to-today">0</mark> days.</li>
+    <li><code><kbd>GET</kbd> <a href="{{ url_for('since_api', request_date=rdate) }}">{{ url_for('since_api', request_date=rdate) }}</a></code></li>
+  </ul>
+</div>
 <p><a href="{{ url_for('home') }}">🏡 Home</a></p>
 {% endblock %}
 
@@ -15,10 +17,14 @@
 <script>
 const api_response = {{ api_response|tojson }};
 $(document).ready(function() {
-  $('.historical-caption').text(api_response['historical_fact']['caption']);
-  $('.historical-date').text(api_response['historical_fact']['found_date']);
-  $('.historical-to-requested').text(api_response['historical_fact']['days_from_this_to_requested']);
-  $('.requested-to-today').text(api_response['requested']['days_since']);
+  if (api_response['historical_fact']['caption']) {
+    $('.historical-caption').text(api_response['historical_fact']['caption']);
+    $('.historical-date').text(api_response['historical_fact']['found_date']);
+    $('.historical-to-requested').text(api_response['historical_fact']['days_from_this_to_requested']);
+    $('.requested-to-today').text(api_response['requested']['days_since']);
+  } else {
+    $('#cool-historical-fact').text("That date is too recent or too old to give an interesting fact.");
+  }
 });
 </script>
 {% endblock%}}
