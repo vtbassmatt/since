@@ -9,4 +9,32 @@
   <li><a href="{{ url_for('since_page', request_date='2000-01-01') }}">January 1, 2000</a></li>
   <li><a href="{{ url_for('since_page', request_date='1982-12-03') }}">December 3, 1982</a></li>
 </ul>
+<form>
+  <div class="form-group">
+    <label for="datePicker" class="form-label">Or pick a date:</label>
+    <div class="input-group">
+      <div class="input-group-prepend">
+        <button type="button" class="btn btn-primary" id="goButton">Jump to 📆</button>
+      </div>
+      <input type="date" class="form-control" id="datePicker">
+    </div>
+  </div>
+</form>
 {% endblock %}
+
+{% block postjquery %}
+<script>
+const rootUrl = "{{ url_for('since_page', request_date='0000-00-00') }}";
+$(document).ready(function() {
+  $('#goButton').click(() => {
+    const chosenDate = $('#datePicker').val();
+    if (chosenDate.length == 10) {
+      const newPath = rootUrl.replace('0000-00-00', chosenDate);
+      window.location.assign(newPath);
+    } else {
+      alert("expeted a date in the form yyyy-mm-dd");
+    }
+  });
+});
+</script>
+{% endblock%}}
