@@ -26,6 +26,12 @@
 <script>
 const rootUrl = "{{ url_for('since_page', request_date='0000-00-00') }}";
 $(document).ready(function() {
+  $('#goButton').prop('disabled', !$('#datePicker').val());
+
+  $('#datePicker').change(() => {
+    $('#goButton').prop('disabled', !$('#datePicker').val());
+  });
+
   $('#goButton').click(() => {
     const chosenDate = $('#datePicker').val();
     if (chosenDate.length == 10) {
