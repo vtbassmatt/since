@@ -15,9 +15,9 @@ SOME_HISTORICAL_DATES = [
     (date(1985, 10, 18), 'the NES launch in New York'),
     (date(1991, 12, 26), 'the end of the USSR'),
     (date(1993, 9, 21), 'the release of Nirvana\'s In Utero'),
-    (date(1995, 2, 14), 'the launch of YouTube'),
     (date(1998, 8, 15), 'the launch of the iMac'),
     (date(2001, 9, 11), 'the destruction of the World Trade Center'),
+    (date(2005, 2, 14), 'the launch of YouTube'),
     (date(2008, 11, 4), 'Barack Obama\'s first presidential election victory'),
 ]
 
