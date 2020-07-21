@@ -2,7 +2,7 @@ from datetime import date, datetime
 
 from flask import Flask, render_template, jsonify, abort
 
-from commit import COMMIT
+from .commit import COMMIT
 
 app = Flask(__name__)
 
