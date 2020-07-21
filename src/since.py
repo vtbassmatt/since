@@ -19,6 +19,11 @@ SOME_HISTORICAL_DATES = [
     (date(2001, 9, 11), 'the destruction of the World Trade Center'),
     (date(2005, 2, 14), 'the launch of YouTube'),
     (date(2008, 11, 4), 'Barack Obama\'s first presidential election victory'),
+    (date(2017, 3, 2), 'Snapchat\'s IPO'),
+    (date(2018, 5, 19), 'Prince Harry married Meghan Markle'),
+    (date(2018, 11, 11), 'the 100th anniversary of the end of World War I'),
+    (date(2019, 4, 26), 'Avengers: Endgame was released'),
+    (date(2019, 12, 18), 'Donald Trump\'s impeachment'),
 ]
 
 @app.route("/")
