@@ -27,8 +27,8 @@ eval $MKDIR_CMD
 echo "::::: Overwriting commit.py with current commit"
 COMMIT_PY_1="# written by deploy.sh"
 COMMIT_PY_2="COMMIT = \\\"$(git rev-parse HEAD)\\\""
-COMMIT_PY_CMD_1="echo \"$COMMIT_PY_1\" > ${SOURCE}commit.py"
-COMMIT_PY_CMD_2="echo \"$COMMIT_PY_2\" >> ${SOURCE}commit.py"
+COMMIT_PY_CMD_1="echo \"$COMMIT_PY_1\" > ${SOURCE}since/commit.py"
+COMMIT_PY_CMD_2="echo \"$COMMIT_PY_2\" >> ${SOURCE}since/commit.py"
 echo "Cmd1: $COMMIT_PY_CMD_1"
 echo "Cmd2: $COMMIT_PY_CMD_2"
 eval $COMMIT_PY_CMD_1
