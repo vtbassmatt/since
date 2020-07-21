@@ -2,6 +2,8 @@ from datetime import date, datetime
 
 from flask import Flask, render_template, jsonify, abort
 
+from commit import COMMIT
+
 app = Flask(__name__)
 
 SOME_HISTORICAL_DATES = [
@@ -35,7 +37,7 @@ SOME_HISTORICAL_DATES = [
 
 @app.route("/")
 def home():
-    return render_template('home.html')
+    return render_template('home.html', commit=COMMIT[0:7])
 
 
 @app.route("/since/<request_date>")
