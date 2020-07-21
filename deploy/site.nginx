@@ -1,0 +1,17 @@
+server {
+
+        root /data/www/since.vtbassmatt.com/html;
+        index index.html index.htm index.nginx-debian.html;
+
+        server_name since.vtbassmatt.com;
+        listen 80;
+
+        location /static {
+                root /data/since-app/current/src/since;
+                try_files $uri =404;
+        }
+        location / {
+                include uwsgi_params;
+                uwsgi_pass localhost:5005;
+        }
+}
