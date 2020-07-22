@@ -30,8 +30,14 @@ SOME_HISTORICAL_DATES = [
     (date(2019, 12, 18), "Donald Trump's impeachment"),
 ]
 
-# dumbest possible implementation that works
+
 def find_historical_thing(search_date):
+    "Find the oldest date in the database that's more recent than the searched date."
+    return _linear_search(search_date)
+
+
+# dumbest possible implementation that works
+def _linear_search(search_date):
     for i in range(len(SOME_HISTORICAL_DATES)):
         if SOME_HISTORICAL_DATES[i][0] > search_date:
             return SOME_HISTORICAL_DATES[i]
