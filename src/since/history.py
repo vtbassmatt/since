@@ -2,38 +2,42 @@ from bisect import bisect_right
 from datetime import date
 
 
-SOME_HISTORICAL_DATES = [
-    (date(1776, 7, 4), "the signing of the Declaration of Independence"),
-    (date(1859, 11, 24), "publication of Darwin's On the Origin of Species"),
-    (date(1930, 7, 7), "the death of Arthur Conan Doyle"),
-    (date(1945, 9, 2), "the official end of World War II"),
-    (date(1947, 8, 15), "Indian independence from the United Kingdom"),
-    (date(1955, 7, 17), "Disneyland opening in Anaheim"),
-    (date(1965, 8, 6), "the Voting Rights Act being signed into law"),
-    (date(1970, 4, 13), "Apollo 13's oxygen tank exploding"),
-    (date(1977, 8, 16), "Elvis Presley's death"),
-    (date(1980, 5, 18), "Mount St. Helens's eruption"),
-    (date(1982, 10, 1), "DisneyWorld's EPCOT opening"),
-    (date(1985, 10, 18), "the NES launch in New York"),
-    (date(1987, 12, 9), "the introduction of Windows 2.0"),
-    (date(1991, 12, 26), "the end of the USSR"),
-    (date(1993, 9, 21), "the release of Nirvana's In Utero"),
-    (date(1995, 4, 19), "the Oklahoma City bombing"),
-    (date(1998, 8, 15), "the launch of the iMac"),
-    (date(2001, 9, 11), "the destruction of the World Trade Center"),
-    (date(2005, 2, 14), "the launch of YouTube"),
-    (date(2008, 11, 4), "Barack Obama's first presidential election victory"),
-    (date(2013, 2, 28), "Pope Benedict XVI's resignation"),
-    (date(2017, 3, 2), "Snapchat's IPO"),
-    (date(2018, 5, 19), "Prince Harry married Meghan Markle"),
-    (date(2018, 11, 11), "the 100th anniversary of the end of World War I"),
-    (date(2019, 4, 26), "Avengers: Endgame was released"),
-    (date(2019, 12, 18), "Donald Trump's impeachment"),
+_SOME_HISTORICAL_DATES = [
+    ('1776-07-04', "the signing of the Declaration of Independence"),
+    ('1859-11-24', "publication of Darwin's On the Origin of Species"),
+    ('1930-07-07', "the death of Arthur Conan Doyle"),
+    ('1945-09-02', "the official end of World War II"),
+    ('1947-08-15', "Indian independence from the United Kingdom"),
+    ('1955-07-17', "Disneyland opening in Anaheim"),
+    ('1965-08-06', "the Voting Rights Act being signed into law"),
+    ('1970-04-13', "Apollo 13's oxygen tank exploding"),
+    ('1977-08-16', "Elvis Presley's death"),
+    ('1980-05-18', "Mount St. Helens's eruption"),
+    ('1982-10-01', "DisneyWorld's EPCOT opening"),
+    ('1985-10-18', "the NES launch in New York"),
+    ('1987-12-09', "the introduction of Windows 2.0"),
+    ('1991-12-26', "the end of the USSR"),
+    ('1993-09-21', "the release of Nirvana's In Utero"),
+    ('1995-04-19', "the Oklahoma City bombing"),
+    ('1998-08-15', "the launch of the iMac"),
+    ('2001-09-11', "the destruction of the World Trade Center"),
+    ('2005-02-14', "the launch of YouTube"),
+    ('2008-11-04', "Barack Obama's first presidential election victory"),
+    ('2013-02-28', "Pope Benedict XVI's resignation"),
+    ('2017-03-02', "Snapchat's IPO"),
+    ('2018-05-19', "Prince Harry married Meghan Markle"),
+    ('2018-11-11', "the 100th anniversary of the end of World War I"),
+    ('2019-04-26', "Avengers: Endgame was released"),
+    ('2019-12-18', "Donald Trump's impeachment"),
 ]
 
-DATES = [x[0] for x in SOME_HISTORICAL_DATES]
-EVENTS = [x[1] for x in SOME_HISTORICAL_DATES]
+def parse_date(date_str):
+    "Turn a yyyy-mm-dd string into a date"
+    return date(*map(int, date_str.split('-')))
 
+DATES = [parse_date(x[0]) for x in _SOME_HISTORICAL_DATES]
+EVENTS = [x[1] for x in _SOME_HISTORICAL_DATES]
+del _SOME_HISTORICAL_DATES
 
 def find_historical_thing(search_date):
     "Find the oldest date more recent than the searched date."
