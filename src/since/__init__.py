@@ -8,9 +8,14 @@ from .history import find_historical_thing
 app = Flask(__name__)
 
 
+@app.context_processor
+def inject_version_info():
+    return dict(commit=COMMIT[0:7])
+
+
 @app.route("/")
 def home():
-    return render_template('home.html', commit=COMMIT[0:7])
+    return render_template('home.html')
 
 
 @app.route("/since/<request_date>")
