@@ -1,3 +1,4 @@
+from bisect import bisect_right
 from datetime import date
 
 
@@ -30,15 +31,24 @@ SOME_HISTORICAL_DATES = [
     (date(2019, 12, 18), "Donald Trump's impeachment"),
 ]
 
+DATES = [x[0] for x in SOME_HISTORICAL_DATES]
+EVENTS = [x[1] for x in SOME_HISTORICAL_DATES]
+
 
 def find_historical_thing(search_date):
-    "Find the oldest date in the database that's more recent than the searched date."
-    return _linear_search(search_date)
+    "Find the oldest date more recent than the searched date."
+    return _binary_search(search_date)
 
 
-# dumbest possible implementation that works
-def _linear_search(search_date):
-    for i in range(len(SOME_HISTORICAL_DATES)):
-        if SOME_HISTORICAL_DATES[i][0] > search_date:
-            return SOME_HISTORICAL_DATES[i]
-    raise ValueError("could not find a valid historical event")
+# https://docs.python.org/3/library/bisect.html#searching-sorted-lists
+def _find_gt(a, x):
+    'Find leftmost value greater than x'
+    i = bisect_right(a, x)
+    if i != len(a):
+        return i    # return the index, not the item
+    raise ValueError
+
+
+def _binary_search(search_date):
+    index = _find_gt(DATES, search_date)
+    return DATES[index], EVENTS[index]
