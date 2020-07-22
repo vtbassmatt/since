@@ -37,7 +37,8 @@ EVENTS = [x[1] for x in SOME_HISTORICAL_DATES]
 
 def find_historical_thing(search_date):
     "Find the oldest date more recent than the searched date."
-    return _binary_search(search_date)
+    index = _find_gt(DATES, search_date)
+    return DATES[index], EVENTS[index]
 
 
 # https://docs.python.org/3/library/bisect.html#searching-sorted-lists
@@ -45,10 +46,6 @@ def _find_gt(a, x):
     'Find leftmost value greater than x'
     i = bisect_right(a, x)
     if i != len(a):
-        return i    # return the index, not the item
+        # return the index, not the item
+        return i
     raise ValueError
-
-
-def _binary_search(search_date):
-    index = _find_gt(DATES, search_date)
-    return DATES[index], EVENTS[index]
