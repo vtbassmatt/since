@@ -2,7 +2,7 @@ from datetime import datetime
 
 from flask import Flask, render_template, jsonify, abort
 
-from .commit import COMMIT
+from .commit import COMMIT, DEPLOY_DATE
 from .history import find_historical_thing
 
 app = Flask(__name__)
@@ -10,7 +10,10 @@ app = Flask(__name__)
 
 @app.context_processor
 def inject_version_info():
-    return dict(commit=COMMIT[0:7])
+    return {
+        'deployed_commit': COMMIT[0:7],
+        'deployed_at': DEPLOY_DATE,
+    }
 
 
 @app.route("/")
