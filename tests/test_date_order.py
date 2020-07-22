@@ -1,11 +1,11 @@
 """
 Make sure that dates are in the correct order.
 
-This module can be deleted if dates are no longer hardcoded in since.py.
+This module can be deleted if dates are no longer hardcoded in history.py.
 """
 from datetime import date
 
-from since import SOME_HISTORICAL_DATES
+from since.history import SOME_HISTORICAL_DATES
 
 
 def test_dates():
