@@ -37,9 +37,10 @@ def parse_date(date_str):
 
 DATES = [parse_date(x[0]) for x in _SOME_HISTORICAL_DATES]
 EVENTS = [x[1] for x in _SOME_HISTORICAL_DATES]
+FACT_COUNT = len(EVENTS)
 del _SOME_HISTORICAL_DATES
 
-def find_historical_thing(search_date):
+def find_historical_fact(search_date):
     "Find the oldest date more recent than the searched date."
     index = _find_gt(DATES, search_date)
     return DATES[index], EVENTS[index]

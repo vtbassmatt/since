@@ -3,7 +3,7 @@ from datetime import datetime
 from flask import Flask, render_template, jsonify, abort
 
 from .commit import COMMIT, DEPLOY_DATE
-from .history import find_historical_thing
+from .history import find_historical_fact, FACT_COUNT
 
 app = Flask(__name__)
 
@@ -13,6 +13,7 @@ def inject_version_info():
     return {
         'deployed_commit': COMMIT[0:7],
         'deployed_at': DEPLOY_DATE,
+        'fact_count': FACT_COUNT,
     }
 
 
@@ -64,7 +65,7 @@ def since_api(request_date):
     }
 
     try:
-        historical_thing = find_historical_thing(search_date)
+        historical_thing = find_historical_fact(search_date)
         days_from_historical_to_request = (request_date_cleaned - historical_thing[0]).days
 
         if days_from_historical_to_request >= 0:
