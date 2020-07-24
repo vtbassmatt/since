@@ -80,6 +80,8 @@ def since_api(request_date):
                 'caption': historical_thing[1],
                 'days_from_this_to_requested': days_from_historical_to_request,
             })
+        else:
+            return api_error("Everything we found was too far back."), 404
 
     except exceptions.DateTooEarlyError:
         return api_error("No interesting facts that far back."), 404
@@ -88,7 +90,7 @@ def since_api(request_date):
         return api_error("No interesting facts that recent."), 404
 
     except ValueError:
-        pass
+        return api_error("Unspecified error"), 404
 
     return jsonify(response), 200
 
