@@ -55,7 +55,10 @@ def since_api(request_date):
     if days_since.days <= 0:
         return api_error(f"Must pick a date before {today}"), 400
     
-    search_date = request_date_cleaned - days_since
+    try:
+        search_date = request_date_cleaned - days_since
+    except OverflowError:
+        return api_error("Can't search that far back."), 404
 
     response = {
         'requested': {
