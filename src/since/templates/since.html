@@ -17,13 +17,15 @@
 <script>
 const api_response = {{ api_response|tojson }};
 $(document).ready(function() {
-  if (api_response['historical_fact']['caption']) {
+  if (api_response?.historical_fact?.caption) {
     $('.historical-caption').text(api_response['historical_fact']['caption']);
     $('.historical-date').text(api_response['historical_fact']['found_date']);
     $('.historical-to-requested').text(api_response['historical_fact']['days_from_this_to_requested']);
     $('.requested-to-today').text(api_response['requested']['days_since']);
+  } else if (api_response?.error) {
+    $('#cool-historical-fact').text(api_response.error);
   } else {
-    $('#cool-historical-fact').text("That date is too recent or too old to give an interesting fact.");
+    $('#cool-historical-fact').text("Something weird happened - got neither an error nor success.");
   }
 });
 </script>

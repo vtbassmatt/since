@@ -1,6 +1,8 @@
 from bisect import bisect_right
 from datetime import date
 
+from . import exceptions
+
 
 _SOME_HISTORICAL_DATES = [
     ('1776-07-04', "the signing of the Declaration of Independence"),
@@ -47,6 +49,11 @@ del _SOME_HISTORICAL_DATES
 
 def find_historical_fact(search_date):
     "Find the oldest date more recent than the searched date."
+    if search_date < DATES[0]:
+        raise exceptions.DateTooEarlyError
+    if search_date > DATES[-1]:
+        raise exceptions.DateTooLateError
+    
     index = _find_gt(DATES, search_date)
     return DATES[index], EVENTS[index]
 
