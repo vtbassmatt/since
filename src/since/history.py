@@ -5,6 +5,8 @@ from . import exceptions
 
 
 _SOME_HISTORICAL_DATES = [
+    ('1066-10-14', "the Battle of Hastings (Norman conquest)"),
+    ('1492-10-12', "Christopher Columbus makes landfall in the Caribbean"),
     ('1776-07-04', "the signing of the Declaration of Independence"),
     ('1859-11-24', "publication of Darwin's On the Origin of Species"),
     ('1930-07-07', "the death of Arthur Conan Doyle"),
@@ -53,7 +55,7 @@ def find_historical_fact(search_date):
         raise exceptions.DateTooEarlyError
     if search_date > DATES[-1]:
         raise exceptions.DateTooLateError
-    
+
     index = _find_gt(DATES, search_date)
     return DATES[index], EVENTS[index]
 
