@@ -2,6 +2,7 @@ from datetime import datetime
 
 from flask import Flask, render_template, jsonify, abort
 
+from . import exceptions
 from .commit import COMMIT, DEPLOY_DATE
 from .history import find_historical_fact, FACT_COUNT
 
@@ -30,12 +31,14 @@ def since_page(request_date):
         abort(404)
     
     string_date = parsed_date.strftime('%Y-%m-%d')
-    api_response = since_api(string_date)
+    api_response, status = since_api(string_date)
+    response_json = api_response.get_json()
 
     return render_template(
         'since.html',
         rdate=string_date,
-        api_response=api_response.get_json())
+        api_response=response_json
+    )
 
 
 @app.route("/api/v1/<request_date>")
@@ -52,7 +55,10 @@ def since_api(request_date):
     if days_since.days <= 0:
         return api_error(f"Must pick a date before {today}"), 400
     
-    search_date = request_date_cleaned - days_since
+    try:
+        search_date = request_date_cleaned - days_since
+    except OverflowError:
+        return api_error("Can't search that far back."), 404
 
     response = {
         'requested': {
@@ -74,11 +80,19 @@ def since_api(request_date):
                 'caption': historical_thing[1],
                 'days_from_this_to_requested': days_from_historical_to_request,
             })
+        else:
+            return api_error("Everything we found was too far back."), 404
+
+    except exceptions.DateTooEarlyError:
+        return api_error("No interesting facts that far back."), 404
+
+    except exceptions.DateTooLateError:
+        return api_error("No interesting facts that recent."), 404
 
     except ValueError:
-        pass
+        return api_error("Unspecified error"), 404
 
-    return jsonify(response)
+    return jsonify(response), 200
 
 
 def api_error(message):
