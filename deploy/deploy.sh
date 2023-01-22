@@ -46,7 +46,7 @@ echo "To  : $SCP_TARGET"
 eval $SCP_CMD
 
 echo "::::: Creating new venv"
-VENV_CMD="ssh ${APP_USER}@$APP_HOST 'python3.8 -m venv ${VENV_DIR}'"
+VENV_CMD="ssh ${APP_USER}@$APP_HOST 'python3 -m venv ${VENV_DIR}'"
 VENV_UPDATE_CMD="ssh ${APP_USER}@$APP_HOST '${VENV_DIR}/bin/python -m pip install -U pip setuptools wheel'"
 echo "In  : $VENV_DIR"
 eval $VENV_CMD

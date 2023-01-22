@@ -1,3 +1,3 @@
-# this file will be overwritten on deployment
+# written by deploy.sh
 COMMIT = "dev"
 DEPLOY_DATE = "it's not"
