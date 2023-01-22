@@ -38,12 +38,22 @@ eval $COMMIT_PY_CMD_1
 eval $COMMIT_PY_CMD_2
 eval $COMMIT_PY_CMD_3
 
+echo "::::: Removing __pycache__"
+RM_PYCACHE_CMD="find $SOURCE -type d -name '__pycache__' -print0 | xargs -0 rm -rf"
+echo "Cmd : $RM_PYCACHE_CMD"
+eval $RM_PYCACHE_CMD
+
 echo "::::: Copying code files"
 SCP_OPTS="-B -r"
 SCP_CMD="scp $SCP_OPTS $SOURCE $SCP_TARGET"
 echo "From: $SOURCE"
 echo "To  : $SCP_TARGET"
 eval $SCP_CMD
+
+echo "::::: Reverting commit.py changes"
+REVERT_COMMIT_PY_CMD="git restore ${SOURCE}since/commit.py"
+echo "Cmd : $REVERT_COMMIT_PY_CMD"
+eval $REVERT_COMMIT_PY_CMD
 
 echo "::::: Creating new venv"
 VENV_CMD="ssh ${APP_USER}@$APP_HOST 'python3 -m venv ${VENV_DIR}'"
