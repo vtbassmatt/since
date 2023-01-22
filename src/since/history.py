@@ -5,10 +5,15 @@ from . import exceptions
 
 
 _SOME_HISTORICAL_DATES = [
+    ('1054-07-16', "the Great Schism (between Roman Catholics and Eastern Orthodox)"),
     ('1066-10-14', "the Battle of Hastings (Norman conquest)"),
+    ('1096-08-15', "the beginning of the First Crusade"),
+    ('1150-01-01', "the year of Angkor Wat's completion"),
+    ('1299-01-01', "the approximate founding of the Ottoman Empire"),
     ('1492-10-12', "Christopher Columbus makes landfall in the Caribbean"),
     ('1776-07-04', "the signing of the Declaration of Independence"),
     ('1859-11-24', "publication of Darwin's On the Origin of Species"),
+    ('1870-01-10', "the founding of Standard Oil"),
     ('1930-07-07', "the death of Arthur Conan Doyle"),
     ('1935-05-30', "Babe Ruth's last career game"),
     ('1940-03-02', "Elmer Fudd's cartoon debut"),
@@ -20,6 +25,8 @@ _SOME_HISTORICAL_DATES = [
     ('1960-02-01', "the Greensboro sit-in at Woolworth's"),
     ('1965-08-06', "the Voting Rights Act being signed into law"),
     ('1970-04-13', "Apollo 13's oxygen tank exploding"),
+    ('1973-01-22', "the Roe v. Wade Supreme Court decision"),
+    ('1975-04-04', "the founding of Microsoft"),
     ('1977-08-16', "Elvis Presley's death"),
     ('1980-05-18', "Mount St. Helens's eruption"),
     ('1982-10-01', "DisneyWorld's EPCOT opening"),
@@ -28,6 +35,7 @@ _SOME_HISTORICAL_DATES = [
     ('1991-12-26', "the end of the USSR"),
     ('1993-09-21', "the release of Nirvana's In Utero"),
     ('1995-04-19', "the Oklahoma City bombing"),
+    ('1998-09-04', "the founding of Google"),
     ('1998-08-15', "the launch of the iMac"),
     ('2001-09-11', "the destruction of the World Trade Center"),
     ('2005-02-14', "the launch of YouTube"),
