@@ -1,5 +1,5 @@
 import azure.functions as func
-from since import flask_app
+from testapp import flask_app
 
 app = func.WsgiFunctionApp(
     app=flask_app.wsgi_app,

@@ -1,7 +1,6 @@
-click==7.1.2
-Flask==1.1.2
-itsdangerous==1.1.0
-Jinja2==2.11.2
-MarkupSafe==1.1.1
-Werkzeug==1.0.1
+# DO NOT include azure-functions-worker in this file
+# The Python Worker is managed by Azure Functions platform
+# Manually managing azure-functions-worker may cause unexpected issues
+
 azure-functions
+Flask
