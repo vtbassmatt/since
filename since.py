@@ -2,9 +2,9 @@ from datetime import datetime
 
 from flask import Flask, render_template, jsonify, abort
 
-from . import exceptions
-from .commit import COMMIT, DEPLOY_DATE
-from .history import find_historical_fact, FACT_COUNT
+import exceptions
+from commit import COMMIT, DEPLOY_DATE
+from history import find_historical_fact, FACT_COUNT
 
 flask_app = Flask(__name__)
 

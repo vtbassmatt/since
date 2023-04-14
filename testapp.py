@@ -1,14 +1,22 @@
 from datetime import datetime
-from flask import Flask, request, Response, render_template, jsonify
+from flask import Flask, Response, render_template, jsonify
+
+try:
+    from commit import COMMIT, DEPLOY_DATE
+    from history import find_historical_fact, FACT_COUNT
+except ImportError:
+    COMMIT = 'import-failed'
+    DEPLOY_DATE = 'test'
+    FACT_COUNT = 0
 
 flask_app = Flask(__name__)
 
 @flask_app.context_processor
 def inject_version_info():
     return {
-        'deployed_commit': 'abcdef0',
-        'deployed_at': 'test',
-        'fact_count': 0,
+        'deployed_commit': COMMIT,
+        'deployed_at': DEPLOY_DATE,
+        'fact_count': FACT_COUNT,
     }
 
 @flask_app.get("/return_http") 
