@@ -6,10 +6,10 @@ from . import exceptions
 from .commit import COMMIT, DEPLOY_DATE
 from .history import find_historical_fact, FACT_COUNT
 
-app = Flask(__name__)
+flask_app = Flask(__name__)
 
 
-@app.context_processor
+@flask_app.context_processor
 def inject_version_info():
     return {
         'deployed_commit': COMMIT[0:7],
@@ -18,12 +18,12 @@ def inject_version_info():
     }
 
 
-@app.route("/")
+@flask_app.route("/")
 def home():
     return render_template('home.html')
 
 
-@app.route("/since/<request_date>")
+@flask_app.route("/since/<request_date>")
 def since_page(request_date):
     try:
         parsed_date = datetime.strptime(request_date, '%Y-%m-%d')
@@ -41,7 +41,7 @@ def since_page(request_date):
     )
 
 
-@app.route("/api/v1/<request_date>")
+@flask_app.route("/api/v1/<request_date>")
 def since_api(request_date):
     try:
         parsed_date = datetime.strptime(request_date, '%Y-%m-%d')
