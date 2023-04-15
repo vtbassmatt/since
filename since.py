@@ -12,7 +12,8 @@ flask_app = Flask(__name__)
 @flask_app.context_processor
 def inject_version_info():
     return {
-        'deployed_commit': COMMIT[0:7],
+        'deployed_commit': COMMIT,
+        'short_commit': COMMIT[0:7],
         'deployed_at': DEPLOY_DATE,
         'fact_count': FACT_COUNT,
     }
