@@ -30,6 +30,18 @@ jobs:
         python -m pip install --upgrade pip
         pip install -r requirements.txt --target=".python_packages/lib/site-packages"
         popd
+    
+    - name: 'Record in-app deployment metadata'
+      shell: bash
+      run: |
+        pushd './${{ env.AZURE_FUNCTIONAPP_PACKAGE_PATH }}'
+        COMMIT_PY_1="# written by deploy.sh"
+        COMMIT_PY_2="COMMIT = \"$GITHUB_SHA\""
+        COMMIT_PY_3="DEPLOY_DATE = \"$(date)\""
+        echo "$COMMIT_PY_1" >commit.py
+        echo "$COMMIT_PY_2" >>commit.py
+        echo "$COMMIT_PY_3" >>commit.py
+        popd
 
     - name: 'Run Azure Functions action'
       uses: Azure/functions-action@v1
