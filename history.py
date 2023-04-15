@@ -1,7 +1,7 @@
 from bisect import bisect_right
 from datetime import date
 
-from . import exceptions
+import exceptions
 
 
 _SOME_HISTORICAL_DATES = [
