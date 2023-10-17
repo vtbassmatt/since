@@ -12,7 +12,7 @@
       {% block content %}{% endblock %}
       <nav class="navbar fixed-bottom navbar-light bg-light">
         <span class="navbar-text">
-          version <code>{% if deployed_commit|length == 40 %}<a class="text-primary" href="https://github.com/vtbassmatt/since/commit/{{ deployed_commit }}">{{ short_commit }}</a>{% else %}{{ short_commit }}{% endif %}</code>
+          version <code>{% if deployed_commit|length == 40 %}<a class="text-primary" href="https://github.com/vtbassmatt/since/tree/{{ deployed_commit }}">{{ short_commit }}</a>{% else %}{{ short_commit }}{% endif %}</code>
           // deployed <code>{{ deployed_at }}</code>
           // <code>{{ fact_count }}</code> facts from <a class="text-primary" href="https://en.wikipedia.org">Wikipedia</a>
         </span>
