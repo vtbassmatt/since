@@ -6,3 +6,5 @@ __queuestorage__
 local.settings.json
 tests/
 .venv
+dev.sh
+testapp.py
